@@ -20,9 +20,42 @@ namespace Next.Controllers
         }
 
         // GET: Servers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
+            ViewData["CPUSortParam"] = String.IsNullOrEmpty(sortOrder) ? "cpu_desc" : "";
+            ViewData["RAMSortParam"] = sortOrder == "ram_desc" ? "ram_asc" : "ram_desc";
+            ViewData["OSSortParam"] = sortOrder == "os_desc" ? "os_asc" : "os_desc";
+            ViewData["DataCenterSortParam"] = sortOrder == "datacenter_desc" ? "datacenter_asc" : "datacenter_desc";
+
             var nextContext = _context.Servers.Include(s => s.DataCenter).Include(s => s.User);
+
+            switch (sortOrder)
+            {
+                case "cpu_desc":
+                    nextContext = nextContext.OrderByDescending(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "ram_desc":
+                    nextContext = nextContext.OrderByDescending(s => s.RAM).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "ram_asc":
+                    nextContext = nextContext.OrderBy(s => s.RAM).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "os_desc":
+                    nextContext = nextContext.OrderByDescending(s => s.OS).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "os_asc":
+                    nextContext = nextContext.OrderBy(s => s.OS).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "datacenter_desc":
+                    nextContext = nextContext.OrderByDescending(s => s.DataCenter.ID).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                case "datacenter_asc":
+                    nextContext = nextContext.OrderBy(s => s.DataCenter.ID).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+                default:
+                    nextContext = nextContext.OrderBy(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
+                    break;
+            }
             return View(await nextContext.ToListAsync());
         }
 

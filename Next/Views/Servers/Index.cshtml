@@ -13,19 +13,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CPU)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CPUSortParam"]">@Html.DisplayNameFor(model => model.CPU)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RAM)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RAMSortParam"]">@Html.DisplayNameFor(model => model.RAM)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OS)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OSSortParam"]">@Html.DisplayNameFor(model => model.OS)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DataCenter)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DataCenterSortParam"]">@Html.DisplayNameFor(model => model.DataCenter)</a>
             </th>
             <th></th>
         </tr>
