@@ -117,7 +117,7 @@ namespace Next.Controllers
         }
 
         // GET: DataCenters/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -131,8 +131,16 @@ namespace Next.Controllers
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
+            }
+
             return View(dataCenter);
         }
+
 
         // POST: DataCenters/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -141,8 +149,17 @@ namespace Next.Controllers
         {
             var dataCenter = await _context.DataCenter.FindAsync(id);
             _context.DataCenter.Remove(dataCenter);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+
+            }
+                   
         }
 
         private bool DataCenterExists(string id)

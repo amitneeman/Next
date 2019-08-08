@@ -38,11 +38,27 @@
             @Html.DisplayNameFor(model => model.DataCenter)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DataCenter.ID)
+            @Html.DisplayFor(model => model.DataCenter.Name)
+        </dd>
+        <dd id="serverCountry" hidden="true">
+            @Html.DisplayFor(model => model.DataCenter.Country)
         </dd>
     </dl>
+</div>
+<div>
+    <div style="text-align: center;">
+        <h4>Server Physcal Location:</h4>
+        <div id="map" style="width:800px; height:500px ; margin: auto;"></div>
+
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+
+@section Scripts {
+    <script src="~/js/orderServer.js"></script>
+    <script src="~/js/serverMap.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqmpZ2NjXkBBJA91a2Jp3cDjMPLRk7UgA&callback=Init"></script>
+}
