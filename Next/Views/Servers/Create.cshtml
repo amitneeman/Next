@@ -1,0 +1,49 @@
+@model Next.Models.Server
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Server</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form id="orderForm" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+
+                <label asp-for="CPU" class="control-label"></label>
+                <input asp-for="CPU" class="form-control" type="number" min="1" max="15" />
+
+                <label asp-for="RAM" class="control-label">RAM IN GB</label>
+                <input asp-for="RAM" class="form-control" type="number" min="1" max="100" />
+            </div>
+            <div class="form-group">
+                <div>
+                    <label class="control-label">Price:</label>
+                    <span id="dollarprice">undetermined</span>
+                </div>
+                <div>
+                    <label class="control-label">In local currency:</label>
+                    <span id="localprice">undetermined</span>
+                </div>
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        <script src="~/js/orderServer.js">
+        </script>
+}

@@ -1,0 +1,1 @@
+﻿dotnet aspnet-codegenerator controller -name UsersController -m User -dc NextContext --relativeFolderPath Controllers --useDefaultLayout --referenceScriptLibraries --useAsyncActions
