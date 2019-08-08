@@ -1,4 +1,4 @@
-@model Next.Models.User
+﻿@model Next.Models.User
 
 @{
     ViewData["Title"] = "Details";
@@ -10,6 +10,24 @@
     <h4>User</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.isAdmin)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.isAdmin)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
     </dl>
 </div>
 <div>

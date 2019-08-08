@@ -14,6 +14,10 @@ namespace Next.Models
         public int RAM { get; set; }
         public string UserID { get; set; }
 
+        public string DataCenterID { get; set; }
+
         public User User { get; set; }
+
+        public DataCenter DataCenter { get; set; }
     }
 }

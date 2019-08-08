@@ -11,5 +11,6 @@ namespace Next.Data
 
         public DbSet<Server> Servers { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Next.Models.DataCenter> DataCenter { get; set; }
     }
 }
