@@ -1,0 +1,40 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{D4463E7F-A5BE-4C8F-A596-69EC7B63A1F2}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Controllers/ServersController.cs">
+    <Files>
+      <File FileName="Next/wwwroot/js/dollarRate.js" Line="7" Column="19" />
+      <File FileName="Next/wwwroot/js/orderServer.js" Line="19" Column="1" />
+      <File FileName="Next/utils.txt" Line="1" Column="186" />
+      <File FileName="Next/Views/Servers/Create.cshtml" Line="39" Column="46" />
+      <File FileName="Next/Models/Server.cs" Line="17" Column="39" />
+      <File FileName="Next/Controllers/DataCentersController.cs" Line="58" Column="10" />
+      <File FileName="Next/Controllers/ServersController.cs" Line="52" Column="69" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Next" expanded="True">
+            <Node name="Next" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="ServersController.cs" selected="True" />
+              </Node>
+              <Node name="Models" expanded="True" />
+              <Node name="Views" expanded="True">
+                <Node name="Servers" expanded="True" />
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Next PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

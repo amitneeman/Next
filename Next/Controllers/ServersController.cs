@@ -22,7 +22,7 @@ namespace Next.Controllers
         // GET: Servers
         public async Task<IActionResult> Index()
         {
-            var nextContext = _context.Servers.Include(s => s.User);
+            var nextContext = _context.Servers.Include(s => s.DataCenter).Include(s => s.User);
             return View(await nextContext.ToListAsync());
         }
 
@@ -35,6 +35,7 @@ namespace Next.Controllers
             }
 
             var server = await _context.Servers
+                .Include(s => s.DataCenter)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (server == null)
@@ -48,6 +49,7 @@ namespace Next.Controllers
         // GET: Servers/Create
         public IActionResult Create()
         {
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID");
             ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID");
             return View();
         }
@@ -57,7 +59,7 @@ namespace Next.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserID")] Server server)
+        public async Task<IActionResult> Create([Bind("ID,CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +67,7 @@ namespace Next.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
             return View(server);
         }
@@ -82,6 +85,7 @@ namespace Next.Controllers
             {
                 return NotFound();
             }
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
             return View(server);
         }
@@ -91,7 +95,7 @@ namespace Next.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID,UserID")] Server server)
+        public async Task<IActionResult> Edit(string id, [Bind("ID,CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
             if (id != server.ID)
             {
@@ -118,6 +122,7 @@ namespace Next.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
             return View(server);
         }
@@ -131,6 +136,7 @@ namespace Next.Controllers
             }
 
             var server = await _context.Servers
+                .Include(s => s.DataCenter)
                 .Include(s => s.User)
                 .FirstOrDefaultAsync(m => m.ID == id);
             if (server == null)
@@ -158,4 +164,3 @@ namespace Next.Controllers
         }
     }
 }
-

@@ -10,27 +10,43 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form id="orderForm" asp-action="Create">
+        <form asp-action="Create" id="orderForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="UserID" class="control-label"></label>
-                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
 
-                <label asp-for="CPU" class="control-label"></label>
-                <input asp-for="CPU" class="form-control" type="number" min="1" max="15" />
-
-                <label asp-for="RAM" class="control-label">RAM IN GB</label>
-                <input asp-for="RAM" class="form-control" type="number" min="1" max="100" />
+                <label asp-for="CPU" class="control-label">CPU: </label>
+                <span id="cpucount">2</span>
+                <input type="range" asp-for="CPU" class="form-control" min="1" max="10" value="2"/>
+                <span asp-validation-for="CPU" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <div>
-                    <label class="control-label">Price:</label>
-                    <span id="dollarprice">undetermined</span>
-                </div>
-                <div>
-                    <label class="control-label">In local currency:</label>
-                    <span id="localprice">undetermined</span>
-                </div>
+                <label asp-for="RAM" class="control-label">RAM: </label>
+                <span id="ramcount">4</span>
+                <input type="range" asp-for="RAM" class="form-control" min="1" max="12" value="4" />
+                <span asp-validation-for="RAM" class="text-danger"></span>
+            </div>
+            <div class="form-group" hidden="true">
+                <label asp-for="UserID" class="control-label"></label>
+                <select asp-for="UserID" class="form-control" asp-items="ViewBag.UserID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="OS" class="control-label"></label>
+                <input asp-for="OS" class="form-control" />
+                <span asp-validation-for="OS" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataCenterID" class="control-label"></label>
+                <select asp-for="DataCenterID" class="form-control" asp-items="ViewBag.DataCenterID"></select>
+            </div>
+            <div>
+                <label class="control-label">Price</label>
+                <spa id="dollarprice">undetermined</spa>
+            </div>
+            <div>
+                <label class="control-label">Price</label>
+                <spa id="localprice">undetermined</spa>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
@@ -42,8 +58,6 @@
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        <script src="~/js/orderServer.js">
-        </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script src="~/js/orderServer.js"></script>
 }
