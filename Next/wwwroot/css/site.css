@@ -43,6 +43,11 @@
     font-size: 20px;
 }
 
+#FilterTilte
+{
+    font-size: 30px;
+}
+
 body {
     font-family: Quicksand;
     padding-top: 50px;
@@ -62,6 +67,9 @@ body {
     line-height: 1.4;
 }
 
+.form-actions no-color{
+    text-align:center;
+}
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
@@ -71,6 +79,8 @@ body {
 #qrCode {
     margin: 15px;
 }
+
+
 
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {

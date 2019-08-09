@@ -8,54 +8,76 @@
 <div id="tran"></div>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> 
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CPUSortParam"]">@Html.DisplayNameFor(model => model.CPU)</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["RAMSortParam"]">@Html.DisplayNameFor(model => model.RAM)</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["OSSortParam"]">@Html.DisplayNameFor(model => model.OS)</a>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["DataCenterSortParam"]">@Html.DisplayNameFor(model => model.DataCenter)</a>
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div align="center">
+    <form asp-action="Index" method="get">
+        <div align="center" class="form-actions no-color">
+            <p>
+                <div id="FilterTilte">
+                    Find by <br />
+                </div>
+                <br />
+                <div display="flex">
+                    DC: <input type="text" name="DcFilter" value="@ViewData["DcFilter"]" />
+                    Minimum CPU: <input type="text" name="cpuFilter" value="@ViewData["cpuFilter"]" />
+                    Minimum RAM: <input type="text" name="ramFilter" value="@ViewData["ramFilter"]" />
+                    <br /><br />
+                </div>
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
+
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CPU)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RAM)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OS)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.User.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DataCenter.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["CPUSortParam"]">@Html.DisplayNameFor(model => model.CPU)</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RAMSortParam"]">@Html.DisplayNameFor(model => model.RAM)</a>
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["OSSortParam"]">@Html.DisplayNameFor(model => model.OS)</a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.User)
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DataCenterSortParam"]">@Html.DisplayNameFor(model => model.DataCenter)</a>
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CPU)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RAM)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCenter.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

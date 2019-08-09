@@ -20,14 +20,31 @@ namespace Next.Controllers
         }
 
         // GET: Servers
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder,  string DcFilter, int cpuFilter, int ramFilter)
         {
             ViewData["CPUSortParam"] = String.IsNullOrEmpty(sortOrder) ? "cpu_desc" : "";
             ViewData["RAMSortParam"] = sortOrder == "ram_desc" ? "ram_asc" : "ram_desc";
             ViewData["OSSortParam"] = sortOrder == "os_desc" ? "os_asc" : "os_desc";
-            ViewData["DataCenterSortParam"] = sortOrder == "datacenter_desc" ? "datacenter_asc" : "datacenter_desc";   
-         
-            var nextContext = _context.Servers.Include(s => s.DataCenter).Include(s => s.User);
+            ViewData["DataCenterSortParam"] = sortOrder == "datacenter_desc" ? "datacenter_asc" : "datacenter_desc";
+            ViewData["ramFilter"] = ramFilter;
+            ViewData["DcFilter"] = DcFilter;
+            ViewData["cpuFilter"] = cpuFilter;
+
+            var nextContext = from s in _context.Servers
+                              select s;
+
+            if (!String.IsNullOrEmpty(DcFilter))
+            {
+                nextContext = nextContext.Where(s => s.DataCenter.Name == DcFilter);
+            }
+            if (cpuFilter > 0)
+            {
+                nextContext = nextContext.Where(s => s.CPU >= cpuFilter);
+            }
+            if (ramFilter > 0)
+            {
+                nextContext = nextContext.Where(s => s.RAM >= ramFilter);
+            }
 
             switch (sortOrder)
             {
