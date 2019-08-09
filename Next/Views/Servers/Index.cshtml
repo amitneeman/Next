@@ -8,7 +8,7 @@
 <div id="tran"></div>
 
 <p>
-    <a asp-action="Create">Create New</a> 
+    <a asp-action="Create">Create New</a>
 </p>
 <div align="center">
     <form asp-action="Index" method="get">
@@ -81,3 +81,9 @@
         </tbody>
     </table>
 </div>
+
+@section Scripts {
+    <script src="~/js/orderServer.js"></script>
+    <script src="~/js/serverMap.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqmpZ2NjXkBBJA91a2Jp3cDjMPLRk7UgA&callback=Init"></script>
+}
