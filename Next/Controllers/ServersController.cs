@@ -82,7 +82,7 @@ namespace Next.Controllers
         // GET: Servers/Create
         public IActionResult Create()
         {
-            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID");
+            ViewData["DCName"] = new SelectList(_context.DataCenter, "ID", "Name");
             return View();
         }
 
@@ -132,12 +132,14 @@ namespace Next.Controllers
                 return NotFound();
             }
 
-            var server = await _context.Servers.FindAsync(id);
+            var server = await _context.Servers.SingleOrDefaultAsync(s => s.ID == id);
             if (server == null)
             {
                 return NotFound();
             }
-            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
+
+
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "Name", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
             return View(server);
         }
