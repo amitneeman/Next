@@ -79,3 +79,14 @@ body {
         display: none;
     }
 }
+
+#profile {
+    display: none;
+}
+#two-factor{
+    display: none;
+}
+
+#personal-data{
+    display: none;
+}

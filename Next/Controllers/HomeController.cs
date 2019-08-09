@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
+using Next.Areas.Identity;
 
 namespace Next.Controllers
 {
@@ -21,17 +22,7 @@ namespace Next.Controllers
 
         public IActionResult Index()
         {
-            string currentUserName = User.Identity.Name;
-            ViewData["isAdmin"] = false;
-            if(currentUserName != null)
-            {
-                var user = _context.Users.SingleOrDefault(u => u.UserName == currentUserName);
-                if (user != null && user.isAdmin)
-                {
-                    ViewData["isAdmin"] = true;
-                }
-
-            }
+            ViewData["isAdmin"] = AuthHelper.isAdmin(User, _context);
             return View();
         }
 
