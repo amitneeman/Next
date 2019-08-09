@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Next.Data;
+using Next.Models;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -36,6 +37,7 @@ namespace Next
 
             services.AddDbContext<NextContext>(options =>
          options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<User>().AddEntityFrameworkStores<NextContext>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -57,6 +59,8 @@ namespace Next
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {

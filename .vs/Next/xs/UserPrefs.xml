@@ -1,8 +1,11 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{D4463E7F-A5BE-4C8F-A596-69EC7B63A1F2}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Controllers/ServersController.cs">
     <Files>
-      <File FileName="Next/Views/Servers/Index.cshtml" Line="25" Column="58" />
-      <File FileName="Next/Controllers/ServersController.cs" Line="41" Column="54" />
+      <File FileName="Next/Controllers/UsersController.cs" Line="52" Column="1" />
+      <File FileName="Next/Models/User.cs" Line="10" Column="10" />
+      <File FileName="Next/Data/DbInitializer.cs" Line="35" Column="35" />
+      <File FileName="Next/Views/Users/Create.cshtml" Line="1" Column="1" />
+      <File FileName="Next/Controllers/ServersController.cs" Line="83" Column="31" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,14 +13,16 @@
           <Node name="Next" expanded="True">
             <Node name="Next" expanded="True">
               <Node name="Dependencies" expanded="True" />
+              <Node name="Areas" expanded="True">
+                <Node name="Identity" expanded="True" />
+              </Node>
               <Node name="Controllers" expanded="True">
                 <Node name="ServersController.cs" selected="True" />
               </Node>
+              <Node name="Data" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="DataCenters" expanded="True" />
-                <Node name="Servers" expanded="True" />
+                <Node name="Users" expanded="True" />
               </Node>
-              <Node name="wwwroot" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -28,7 +33,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/amitneeman/Projects/Next/.git/index" relfile=".git/index" line="17" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>

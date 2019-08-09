@@ -25,8 +25,8 @@ namespace Next.Controllers
             ViewData["CPUSortParam"] = String.IsNullOrEmpty(sortOrder) ? "cpu_desc" : "";
             ViewData["RAMSortParam"] = sortOrder == "ram_desc" ? "ram_asc" : "ram_desc";
             ViewData["OSSortParam"] = sortOrder == "os_desc" ? "os_asc" : "os_desc";
-            ViewData["DataCenterSortParam"] = sortOrder == "datacenter_desc" ? "datacenter_asc" : "datacenter_desc";
-
+            ViewData["DataCenterSortParam"] = sortOrder == "datacenter_desc" ? "datacenter_asc" : "datacenter_desc";   
+         
             var nextContext = _context.Servers.Include(s => s.DataCenter).Include(s => s.User);
 
             switch (sortOrder)
@@ -83,7 +83,6 @@ namespace Next.Controllers
         public IActionResult Create()
         {
             ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID");
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID");
             return View();
         }
 
@@ -94,6 +93,17 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
+            string currentUserName = User.Identity.Name;
+            if(currentUserName == null)
+            {
+                return View("_NotLoggedIn");
+            }
+
+            var user = await _context.Users
+                .FirstOrDefaultAsync(u => u.UserName == currentUserName);
+
+            server.UserID = user.Id;
+
             if (ModelState.IsValid)
             {
                 try
@@ -110,7 +120,7 @@ namespace Next.Controllers
                 }
             }
             ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
+            ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
             return View(server);
         }
 
@@ -128,7 +138,7 @@ namespace Next.Controllers
                 return NotFound();
             }
             ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
+            ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
             return View(server);
         }
 
