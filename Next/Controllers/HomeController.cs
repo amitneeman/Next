@@ -4,14 +4,34 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Next.Data;
 using Next.Models;
 
 namespace Next.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly NextContext _context;
+
+        public HomeController(NextContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
+            string currentUserName = User.Identity.Name;
+            ViewData["isAdmin"] = false;
+            if(currentUserName != null)
+            {
+                var user = _context.Users.SingleOrDefault(u => u.UserName == currentUserName);
+                if (user != null && user.isAdmin)
+                {
+                    ViewData["isAdmin"] = true;
+                }
+
+            }
             return View();
         }
 
