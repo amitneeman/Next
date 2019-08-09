@@ -1,20 +1,11 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{D4463E7F-A5BE-4C8F-A596-69EC7B63A1F2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Areas/Identity/Pages/Account/Login.cshtml.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Views/Servers/Edit.cshtml">
     <Files>
-      <File FileName="Next/Areas/Identity/Pages/Account/Register.cshtml.cs" Line="77" Column="14" />
-      <File FileName="Next/Controllers/HomeController.cs" />
-      <File FileName="Next/wwwroot/css/site.css" Line="91" Column="19" />
-      <File FileName="Next/Areas/Identity/Pages/Account/Login.cshtml" />
-      <File FileName="Next/Views/Home/Index.cshtml" />
-      <File FileName="Next/Areas/Identity/Pages/Account/Login.cshtml.cs" Line="94" Column="29" />
-      <File FileName="Next/Views/Shared/_LoginPartial.cshtml" Line="11" Column="51" />
-      <File FileName="Next/Areas/Identity/AuthHelper.cs" Line="18" Column="1" />
-      <File FileName="Next/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml" />
-      <File FileName="Next/Areas/Identity/Pages/Account/_ViewImports.cshtml" />
-      <File FileName="Next/Areas/Identity/Pages/Account/Logout.cshtml" />
-      <File FileName="Next/Areas/Identity/Pages/Account/Logout.cshtml.cs" />
-      <File FileName="Next/Areas/Identity/Pages/Account/Register.cshtml" Line="1" Column="1" />
-      <File FileName="Next/Controllers/ServersController.cs" Line="1" Column="1" />
+      <File FileName="Next/Controllers/ServersController.cs" Line="140" Column="14" />
+      <File FileName="Next/Views/Servers/Index.cshtml" Line="48" Column="69" />
+      <File FileName="Next/Views/Servers/Create.cshtml" Line="34" Column="39" />
+      <File FileName="Next/Models/DataCenter.cs" Line="11" Column="27" />
+      <File FileName="Next/Views/Servers/Edit.cshtml" Line="23" Column="42" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -23,18 +14,16 @@
             <Node name="Next" expanded="True">
               <Node name="Areas" expanded="True">
                 <Node name="Identity" expanded="True">
-                  <Node name="Pages" expanded="True">
-                    <Node name="Account" expanded="True">
-                      <Node name="Login.cshtml.cs" selected="True" />
-                    </Node>
-                  </Node>
+                  <Node name="Pages" expanded="True" />
                 </Node>
               </Node>
               <Node name="Controllers" expanded="True" />
               <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
+                <Node name="Servers" expanded="True">
+                  <Node name="Edit.cshtml" selected="True" />
+                </Node>
               </Node>
               <Node name="wwwroot" expanded="True">
                 <Node name="css" expanded="True" />
