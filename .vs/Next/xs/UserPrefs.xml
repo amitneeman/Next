@@ -1,39 +1,45 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{D4463E7F-A5BE-4C8F-A596-69EC7B63A1F2}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Views/Servers/Index.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Next/Views/Home/Index.cshtml">
     <Files>
       <File FileName="Next/Controllers/ServersController.cs" Line="79" Column="12" />
-      <File FileName="Next/Views/Servers/Index.cshtml" Line="90" Column="1" />
+      <File FileName="Next/Views/Servers/Index.cshtml" />
       <File FileName="Next/Views/Servers/Create.cshtml" />
-      <File FileName="Next/Models/DataCenter.cs" />
+      <File FileName="Next/Models/DataCenter.cs" Line="1" Column="1" />
       <File FileName="Next/Views/Servers/Edit.cshtml" />
-      <File FileName="Next/Adapters/TwitterAdapter.cs" Line="15" Column="24" />
-      <File FileName="Next/appsettings.json" Line="1" Column="2" />
-      <File FileName="Next/Controllers/TwitterController.cs" Line="25" Column="33" />
-      <File FileName="Next/Startup.cs" Line="23" Column="31" />
-      <File FileName="Next/Views/Home/Index.cshtml" Line="57" Column="15" />
-      <File FileName="Next/wwwroot/js/tweetsIntegration.js" Line="7" Column="44" />
-      <File FileName="Next/Views/Servers/Details.cshtml" Line="60" Column="1" />
+      <File FileName="Next/Adapters/TwitterAdapter.cs" Line="12" Column="1" />
+      <File FileName="Next/appsettings.json" Line="14" Column="27" />
+      <File FileName="Next/Controllers/TwitterController.cs" Line="31" Column="1" />
+      <File FileName="Next/wwwroot/js/tweetsIntegration.js" Line="18" Column="1" />
+      <File FileName="Next/wwwroot/css/site.css" Line="1" Column="1" />
+      <File FileName="Next/wwwroot/css/tweets.css" Line="9" Column="1" />
+      <File FileName="Next/Views/Home/About.cshtml" Line="1" Column="1" />
+      <File FileName="Next/Views/Home/Index.cshtml" Line="8" Column="32" />
+      <File FileName="Next/Views/_ViewStart.cshtml" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Next" expanded="True">
             <Node name="Next" expanded="True">
-              <Node name="Dependencies" expanded="True" />
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
               <Node name="Adapters" expanded="True" />
               <Node name="Controllers" expanded="True" />
+              <Node name="Models" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Servers" expanded="True">
+                <Node name="Home" expanded="True">
                   <Node name="Index.cshtml" selected="True" />
                 </Node>
+                <Node name="Servers" expanded="True" />
               </Node>
-              <Node name="wwwroot" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="css" expanded="True" />
+                <Node name="js" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

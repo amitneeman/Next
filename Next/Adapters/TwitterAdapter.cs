@@ -1,27 +1,38 @@
 ﻿using System;
 using System.Net.Http;
-
+using OAuth;
+using System.Net;
+using System.Text;
 namespace Next.Adapters
 {
     public class TwitterAdapter
     {
-        public static string TweeterCall(string url,string authString)
+        public static string TweeterCall(string url,string consumerKey,string consumerSecret)
         {
-            HttpResponseMessage data = null;
-            HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("OAuth",authString);
-            try
+            OAuthRequest client = new OAuthRequest
             {
-                data = client.GetAsync(@url).Result;
-                string res = data.Content.ReadAsStringAsync().Result;
-                return res;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return "[]";
-            }
+                Method = "GET",
+                Type = OAuthRequestType.RequestToken,
+                SignatureMethod = OAuthSignatureMethod.HmacSha1,
+                ConsumerKey = consumerKey,
+                ConsumerSecret = consumerSecret,
+                RequestUrl = url,
+                Version = "1.0a",
+                Realm = "twitter.com"
+            };
+
+            string auth = client.GetAuthorizationHeader();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(client.RequestUrl);
+            request.Headers.Add("Authorization", auth);
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            var encoding = Encoding.UTF8;
+            var reader = new System.IO.StreamReader(response.GetResponseStream(), encoding);
+            string responseText = reader.ReadToEnd();
+            reader.Dispose();
+            return responseText;
         }
 
     }
 }
+
