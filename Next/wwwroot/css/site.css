@@ -80,6 +80,10 @@ body {
     margin: 15px;
 }
 
+#myCarousel{
+    margin-top: 35px;
+    margin-bottom: 35px;
+}
 
 
 /* Hide/rearrange for smaller screens */
