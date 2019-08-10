@@ -1,5 +1,12 @@
 ﻿$(document).ready(() => {
 
+    setTimeout(() => {
+        var c = document.getElementById("tweeterlogo");
+        var ctx = c.getContext("2d");
+        var img = document.getElementById("twitter");
+        ctx.drawImage(img, 0, 0);
+    }, 1000);
+
     $.get("https://localhost:5001/Twitter/LinuxTweets").then((tweets) => {
 
         let tweetTemplate = (user, text) => (
