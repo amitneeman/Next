@@ -34,15 +34,15 @@
                 <span asp-validation-for="OS" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataCenterID" class="control-label"></label>
+                <label asp-for="DataCenterID" class="control-label">Data Center</label>
                 <select asp-for="DataCenterID" class="form-control" asp-items="ViewBag.DCName"></select>
             </div>
             <div>
-                <label class="control-label">Price</label>
+                <label class="control-label">Price: </label>
                 <spa id="dollarprice">undetermined</spa>
             </div>
             <div>
-                <label class="control-label">Price</label>
+                <label class="control-label">Local Price: </label>
                 <spa id="localprice">undetermined</spa>
             </div>
             <div class="form-group">

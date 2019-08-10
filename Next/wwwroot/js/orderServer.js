@@ -1,7 +1,8 @@
 ﻿let cpu = $('#CPU').val();
     let ram = $('#RAM').val();
 
-    updatePrice(cpu, ram);
+updatePrice(cpu, ram);
+updateMetrix(cpu, ram);
 
 $("#orderForm").change(async (data) => {
     let cpu = $('#CPU').val();

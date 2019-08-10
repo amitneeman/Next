@@ -10,17 +10,19 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="orderForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ID" />
             <div class="form-group">
-                <label asp-for="CPU" class="control-label"></label>
-                <input asp-for="CPU" class="form-control" />
+                <label asp-for="CPU" class="control-label">CPU: </label>
+                <span id="cpucount">undetermined</span>
+                <input type="range" asp-for="CPU" class="form-control" min="1" max="10" />
                 <span asp-validation-for="CPU" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RAM" class="control-label"></label>
-                <input asp-for="RAM" class="form-control" />
+                <label asp-for="RAM" class="control-label">RAM: </label>
+                <span id="ramcount">undetermined</span>
+                <input type="range" asp-for="RAM" class="form-control" min="1" max="12" />
                 <span asp-validation-for="RAM" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
@@ -34,9 +36,17 @@
                 <span asp-validation-for="OS" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataCenterID" class="control-label"></label>
+                <label asp-for="DataCenterID" class="control-label">DataCenter</label>
                 <select asp-for="DataCenterID" class="form-control" asp-items="ViewBag.DataCenterID"></select>
                 <span asp-validation-for="DataCenterID" class="text-danger"></span>
+            </div>
+            <div>
+                <label class="control-label">Price</label>
+                <spa id="dollarprice">undetermined</spa>
+            </div>
+            <div>
+                <label class="control-label">Local price:</label>
+                <spa id="localprice">undetermined</spa>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-default" />
@@ -51,4 +61,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/orderServer.js"></script>
+
 }

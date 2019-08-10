@@ -179,7 +179,7 @@ namespace Next.Controllers
             "see your system administrator.");
                 }
             }
-            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
+            ViewData["DCName"] = new SelectList(_context.DataCenter, "ID", "Name", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
             return View(server);
         }
