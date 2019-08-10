@@ -112,6 +112,7 @@ body {
     text-decoration: none !important;
     transition: 0.5s all;
     color: black !important;
+    border-radius: 5px 5px 5px 5px;
 }
 
     .startorder:hover {
@@ -121,15 +122,16 @@ body {
         font-size: 16px; 
     }
 
-    .adminoption {
-        padding: 10px;
-        box-shadow: 0 0 1px black;
-        cursor: pointer;
-        text-decoration: none !important;
-        transition: 0.5s all;
-        color: black !important;
-        list-style-type: none;
-    }
+.adminoption {
+    padding: 10px;
+    box-shadow: 0 0 1px black;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: 0.5s all;
+    color: black !important;
+    list-style-type: none;
+    border-radius: 5px 5px 5px 5px;
+}
 
         .adminoption:hover {
             color: white !important;
