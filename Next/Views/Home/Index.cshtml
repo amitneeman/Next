@@ -80,6 +80,20 @@
 
 </div>
 
+<div>
+    <img id="twitter" src="~/images/twitter.png" alt="Twitter" width="128" height="128" hidden="hidden">
+    <p align="center">
+        <canvas id="myCanvas" width="128" height="128" style="border:1px solid #d3d3d3"></canvas>
+    </p>
+
+    <script>
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("twitter");
+            ctx.drawImage(img, 0, 0);
+    </script>
+</div>
+
 <aside id="tweetArea"></aside>
 @section Scripts {
     <script src="~/js/tweetsIntegration.js"></script>

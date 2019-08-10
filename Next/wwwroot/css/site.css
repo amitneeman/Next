@@ -24,7 +24,7 @@
 
 #tran {
     width: 330px; /*340*/
-    height: 10px; /*340*/
+    height: 7px; /*340*/
     border-radius: 10px 10px 10px 10px;
     background: gray /*url("~/images/DC.jpg")*/;
     transition: width 2s;
