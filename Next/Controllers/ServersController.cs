@@ -114,6 +114,12 @@ namespace Next.Controllers
                 return NotFound();
             }
 
+            if (!AuthHelper.isPermitted(User, server.UserID, _context))
+            {
+                return View("_UnAuthorized");
+            }
+
+
             return View(server);
         }
 
@@ -204,6 +210,11 @@ namespace Next.Controllers
                 return NotFound();
             }
 
+            if(!AuthHelper.isPermitted(User, server.UserID, _context))
+            {
+                return View("_UnAuthorized");
+            }
+
 
             ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "Name", server.DataCenterID);
             ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
@@ -248,8 +259,8 @@ namespace Next.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "ID", server.DataCenterID);
-            ViewData["UserID"] = new SelectList(_context.Users, "ID", "ID", server.UserID);
+            ViewData["DataCenterID"] = new SelectList(_context.DataCenter, "ID", "Name", server.DataCenterID);
+            ViewData["UserID"] = new SelectList(_context.Users, "Id", "Id", server.UserID);
             return View(server);
         }
 
@@ -274,6 +285,11 @@ namespace Next.Controllers
             if (server == null)
             {
                 return NotFound();
+            }
+
+            if (!AuthHelper.isPermitted(User, server.UserID, _context))
+            {
+                return View("_UnAuthorized");
             }
 
             return View(server);
