@@ -62,6 +62,7 @@ namespace Next.Controllers
 
             switch (sortOrder)
             {
+
                 case "cpu_desc":
                     nextContext = nextContext.OrderByDescending(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
                     break;
@@ -93,6 +94,12 @@ namespace Next.Controllers
         // GET: Servers/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -113,9 +120,15 @@ namespace Next.Controllers
         // GET: Servers/Create
         public IActionResult Create()
         {
-            if(getLinuxOrdersCount() >= 2)
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
             {
-                ViewData["LinuxGuide"] = "Hello! we have seen you ordered some linux servers recently! here is a guide to operate them:";
+                return View("_NotLoggedIn");
+            }
+
+            if (getLinuxOrdersCount() >= 2)
+            {
+                ViewData["LinuxGuide"] = "🐧🐧 Hello! we have seen you ordered some linux servers recently! here is a guide to operate them: 🐧🐧";
                 ViewData["linuxLink"] = "https://ryanstutorials.net/linuxtutorial/"; 
             }
             ViewData["DCName"] = new SelectList(_context.DataCenter, "ID", "Name");
@@ -129,7 +142,13 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
-            if(server.OS == OS.Linux)
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
+            if (server.OS == OS.Linux)
             {
                 increaseLinuxCount();
             }
@@ -168,6 +187,12 @@ namespace Next.Controllers
         // GET: Servers/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -192,6 +217,12 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("ID,CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id != server.ID)
             {
                 return NotFound();
@@ -225,6 +256,12 @@ namespace Next.Controllers
         // GET: Servers/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
