@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
 using Next.Areas.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Next.Controllers
 {
@@ -112,6 +113,11 @@ namespace Next.Controllers
         // GET: Servers/Create
         public IActionResult Create()
         {
+            if(getLinuxOrdersCount() >= 2)
+            {
+                ViewData["LinuxGuide"] = "Hello! we have seen you ordered some linux servers recently! here is a guide to operate them:";
+                ViewData["linuxLink"] = "https://ryanstutorials.net/linuxtutorial/"; 
+            }
             ViewData["DCName"] = new SelectList(_context.DataCenter, "ID", "Name");
             return View();
         }
@@ -123,6 +129,11 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
+            if(server.OS == OS.Linux)
+            {
+                increaseLinuxCount();
+            }
+
             string currentUserName = User.Identity.Name;
             if(currentUserName == null)
             {
@@ -245,6 +256,28 @@ namespace Next.Controllers
         private bool ServerExists(string id)
         {
             return _context.Servers.Any(e => e.ID == id);
+        }
+
+        private void increaseLinuxCount()
+        {
+            int? current = HttpContext.Session.GetInt32("linux");
+            if(current == null)
+            {
+                current = 0;
+            }
+
+            HttpContext.Session.SetInt32("linux", ((int)current + 1));
+        }
+
+        private int getLinuxOrdersCount()
+        {
+            int? current = HttpContext.Session.GetInt32("linux");
+            if(current == null)
+            {
+                return 0;
+            }
+
+            return (int)current;
         }
     }
 }
