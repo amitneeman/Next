@@ -5,6 +5,31 @@
 }
 <h1 id="header">Users</h1>
 <div id="tran"></div>
+
+<div align="center">
+    <form asp-action="Index" method="get">
+        <div align="center" class="form-actions no-color">
+            <p>
+                <div id="FilterTilte">
+                    Find by <br />
+                </div>
+                <br />
+                <div display="flex">
+                    ID: <input type="text" name="IdFilter" value="@ViewData["IdFilter"]" />
+                    Name: <input type="text" name="NameFilter" value="@ViewData["NameFilter"]" />
+                    Type: <select name="IsAdminFilter" selected="@ViewData["IsAdminFilter"]">
+                              <option value="All">All</option>
+                              <option value="Admin">Admin</option>
+                              <option value="User">User</option>
+                          </select>
+                    <br /><br />
+                </div>
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
@@ -19,33 +44,35 @@
                 <th>
                     @Html.DisplayNameFor(model => model.isAdmin)
                 </th>
-              
+
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.isAdmin)
-                </td>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.isAdmin)
+                    </td>
 
-                <td>
-                   <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
-                   @if(!item.isAdmin){
-                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                   }
-                </td>
-            </tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        @if (!item.isAdmin)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        }
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
- 
+</div>
+
 

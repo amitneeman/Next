@@ -23,6 +23,7 @@ namespace Next.Controllers
         public async Task<IActionResult> Index(string countryFilter, string nameFilter)
         {
             ViewData["countryFilter"] = countryFilter;
+            ViewData["nameFilter"] = nameFilter;
 
             //nextContext = nextContext.GroupBy(dc => dc.Name).Select(g => new { name = g.Key, count = g.Count() });
             /*var nextContext = from dc in _context.DataCenter
@@ -35,18 +36,18 @@ namespace Next.Controllers
                                   g.Key.Country,
                                   g.Key.Count
                               };*/
-                               
+
 
             var nextContext = from s in _context.DataCenter
                               select s;
 
             if (!String.IsNullOrEmpty(countryFilter))
             {
-                nextContext = nextContext.Where(s => s.Country == countryFilter);
+                nextContext = nextContext.Where(s => s.Country.Contains(countryFilter));
             }
             if (!String.IsNullOrEmpty(nameFilter))
             {
-                nextContext = nextContext.Where(s => s.Name == nameFilter);
+                nextContext = nextContext.Where(s => s.Name.Contains(nameFilter));
             }
 
 

@@ -48,7 +48,7 @@ namespace Next.Controllers
 
             if (!String.IsNullOrEmpty(DcFilter))
             {
-                nextContext = nextContext.Where(s => s.DataCenter.Name == DcFilter);
+                nextContext = nextContext.Where(s => s.DataCenter.Name.Contains(DcFilter));
             }
             if (cpuFilter > 0)
             {

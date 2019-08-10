@@ -23,9 +23,33 @@ namespace Next.Controllers
         }
 
         // GET: Users
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string idFilter, string nameFilter, string IsAdminFilter)
         {
-            return View(await _context.Users.ToListAsync());
+            ViewData["IdFilter"] = idFilter;
+            ViewData["NameFilter"] = nameFilter;
+            ViewData["IsAdminFilter"] = IsAdminFilter;
+
+            var UsersList = from u in _context.Users
+                              select u;
+
+            if (!String.IsNullOrEmpty(idFilter))
+            {
+                UsersList = UsersList.Where(u => u.Id.Contains(idFilter));
+            }
+            if (!String.IsNullOrEmpty(nameFilter))
+            {
+                UsersList = UsersList.Where(u => u.UserName.Contains(nameFilter));
+            }
+            if (IsAdminFilter == "Admin")
+            {
+                UsersList = UsersList.Where(u => u.isAdmin == true);
+            }
+            if (IsAdminFilter == "User")
+            {
+                UsersList = UsersList.Where(u => u.isAdmin == false);
+            }
+
+            return View(await UsersList.ToListAsync());
         }
 
         // GET: Users/Details/5
