@@ -144,7 +144,7 @@ namespace Next.Controllers
         }
 
         // GET: Users/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string id, bool? saveChangesError = false)
         {
             if (id == null)
             {
@@ -158,6 +158,12 @@ namespace Next.Controllers
                 return NotFound();
             }
 
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "The user has active servers and cannot be deleted.";
+            }
+
             return View(user);
         }
 
@@ -166,10 +172,19 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
+
             var user = await _context.Users.FindAsync(id);
             _context.Users.Remove(user);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException)
+            {
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
+
+            }
         }
 
         private bool UserExists(string id)
