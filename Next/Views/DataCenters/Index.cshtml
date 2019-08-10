@@ -9,21 +9,41 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+
+<div align="center">
+    <form asp-action="Index" method="get">
+        <div align="center" class="form-actions no-color">
+            <p>
+                <div id="FilterTilte">
+                    Find by <br />
+                </div>
+                <br />
+                <div display="flex">
+                    Country: <input type="text" name="countryFilter" value="@ViewData["countryFilter"]" />
+                    Name: <input type="text" name="nameFilter" value="@ViewData["nameFilter"]" />
+                    Minimum Servers Amount: <input type="text" name="serverAmountFilter" value="@ViewData["serverAmountFilter"]" />
+                    <br /><br />
+                </div>
+                <input type="submit" value="Search" class="btn btn-default" /> |
+                <a asp-action="Index">Back to Full List</a>
+            </p>
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Country)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
@@ -37,6 +57,7 @@
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>
+</div>

@@ -20,9 +20,37 @@ namespace Next.Controllers
         }
 
         // GET: DataCenters
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string countryFilter, string nameFilter)
         {
-            return View(await _context.DataCenter.ToListAsync());
+            ViewData["countryFilter"] = countryFilter;
+
+            //nextContext = nextContext.GroupBy(dc => dc.Name).Select(g => new { name = g.Key, count = g.Count() });
+            /*var nextContext = from dc in _context.DataCenter
+                              join ser in _context.Servers
+                              on dc.ID equals ser.DataCenterID
+                              group new { dc, ser } by new { dc.Name, dc.Country, dc.Servers.Count } into g
+                              select new
+                              {
+                                  g.Key.Name,
+                                  g.Key.Country,
+                                  g.Key.Count
+                              };*/
+                               
+
+            var nextContext = from s in _context.DataCenter
+                              select s;
+
+            if (!String.IsNullOrEmpty(countryFilter))
+            {
+                nextContext = nextContext.Where(s => s.Country == countryFilter);
+            }
+            if (!String.IsNullOrEmpty(nameFilter))
+            {
+                nextContext = nextContext.Where(s => s.Name == nameFilter);
+            }
+
+
+            return View(await nextContext.ToListAsync());
         }
 
         // GET: DataCenters/Details/5

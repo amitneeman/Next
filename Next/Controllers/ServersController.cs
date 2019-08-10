@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
+using Next.Areas.Identity;
 
 namespace Next.Controllers
 {
@@ -22,6 +23,8 @@ namespace Next.Controllers
         // GET: Servers
         public async Task<IActionResult> Index(string sortOrder,  string DcFilter, int cpuFilter, int ramFilter)
         {
+            bool isAdmin = AuthHelper.isAdmin(User, _context);
+            string username = User.Identity.Name;
             ViewData["CPUSortParam"] = String.IsNullOrEmpty(sortOrder) ? "cpu_desc" : "";
             ViewData["RAMSortParam"] = sortOrder == "ram_desc" ? "ram_asc" : "ram_desc";
             ViewData["OSSortParam"] = sortOrder == "os_desc" ? "os_asc" : "os_desc";
@@ -31,7 +34,17 @@ namespace Next.Controllers
             ViewData["cpuFilter"] = cpuFilter;
 
             var nextContext = from s in _context.Servers
-                              select s;
+                                            select s;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+            else if (!isAdmin)
+            {
+                 nextContext = nextContext.Where(s => s.User.UserName == username);
+            }
+
 
             if (!String.IsNullOrEmpty(DcFilter))
             {
@@ -72,7 +85,7 @@ namespace Next.Controllers
                 default:
                     nextContext = nextContext.OrderBy(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
                     break;
-            }
+            }C:\Users\Ron\source\repos\Next\Next\Controllers\ServersController.cs
             return View(await nextContext.ToListAsync());
         }
 
