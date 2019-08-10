@@ -81,11 +81,25 @@
 </div>
 
 <div>
-    <img id="twitter" src="~/images/twitter.png" alt="Twitter" width="128" height="128" hidden="hidden">
     <p align="center">
+<<<<<<< HEAD
         <canvas id="tweeterlogo" width="128" height="128" style="border:1px solid #d3d3d3"></canvas>
     </p>
    
+=======
+        <img id="twitter" src="~/images/twitter.png"  hidden/>
+        <canvas id="myCanvas" width="128" height="128" style="border:1px solid #d3d3d3;"></canvas>
+    </p>
+
+    <script>
+        window.onload = function () {
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var img = document.getElementById("twitter");
+            ctx.drawImage(img, 0, 0);
+        };
+    </script>
+>>>>>>> 131c38593625dd01cde0a3456b2a652962c6b94c
 </div>
 
 <aside id="tweetArea"></aside>
