@@ -85,7 +85,7 @@ namespace Next.Controllers
                 default:
                     nextContext = nextContext.OrderBy(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
                     break;
-            }C:\Users\Ron\source\repos\Next\Next\Controllers\ServersController.cs
+            }
             return View(await nextContext.ToListAsync());
         }
 
