@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
+using Next.Areas.Identity;
 
 namespace Next.Controllers
 {
@@ -22,6 +23,10 @@ namespace Next.Controllers
         // GET: DataCenters
         public async Task<IActionResult> Index(string countryFilter, string nameFilter)
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             ViewData["countryFilter"] = countryFilter;
             ViewData["nameFilter"] = nameFilter;
 
@@ -57,6 +62,10 @@ namespace Next.Controllers
         // GET: DataCenters/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -75,6 +84,10 @@ namespace Next.Controllers
         // GET: DataCenters/Create
         public IActionResult Create()
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             return View();
         }
 
@@ -97,6 +110,10 @@ namespace Next.Controllers
         // GET: DataCenters/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             if (id == null)
             {
                 return NotFound();
@@ -148,6 +165,10 @@ namespace Next.Controllers
         // GET: DataCenters/Delete/5
         public async Task<IActionResult> Delete(string id, bool? saveChangesError = false)
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             if (id == null)
             {
                 return NotFound();

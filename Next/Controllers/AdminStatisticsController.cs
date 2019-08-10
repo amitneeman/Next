@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
 using System.Text;
+using Next.Areas.Identity;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +27,10 @@ namespace Next.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
+            if (!AuthHelper.isAdmin(User, _context))
+            {
+                return View("_UnAuthorized");
+            }
             return View();
         }
 
