@@ -9,18 +9,18 @@
 
     $.get("https://localhost:5001/Twitter/LinuxTweets").then((tweets) => {
 
-        let tweetTemplate = (user, text) => (
+        let tweetTemplate = (user,userpic, text) => (
             `
                 <li class="tweetWrapper">
 
                     <div class="innerTweet">
-                        <h4>
-                            ${user}
-                        </h4>
+                        <div class="tweetuserarea">
+                            <img class="profileimg" src="${userpic}"/>
+                            <h4 class="tweetusername">${user}</h4>
+                        </div>
                         <p>
                         ${text}
-                        </p>
-                    
+                        </p>                 
                     </div>
 
 
@@ -28,7 +28,7 @@
             `
         );
 
-        tweets = JSON.parse(tweets).statuses.map(tweet => tweetTemplate(tweet.user.name,tweet.text)).slice(0, 10);
+        tweets = JSON.parse(tweets).statuses.map(tweet => tweetTemplate(tweet.user.name, tweet.user.profile_image_url,tweet.text)).slice(0, 10);
         let list = `<ul class="tweetsList">${tweets.join(" ")}</ul>`
 
         document.getElementById("tweetArea").innerHTML = list;
