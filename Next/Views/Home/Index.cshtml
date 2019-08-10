@@ -2,6 +2,25 @@
     ViewData["Title"] = "Home Page";
 }
 
+<link rel="stylesheet" href="/css/tweets.css">
+
+@if ((bool)ViewData["isAdmin"] == true)
+{
+
+    <div>
+        <h2> Hello administrator!</h2>
+        <ul>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage application Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="DataCenters" asp-action="Index">Manage the Data Centers</a>
+            </li>
+        </ul>
+    </div>
+
+}
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -54,21 +73,7 @@
 
 </div>
 
-
-@if((bool)ViewData["isAdmin"] == true){
-
-<div>
-    <h2> Hello administrator!</h2>
-    <ul>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="Index">Manage application Users</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="DataCenters" asp-action="Index">Manage the Data Centers</a>
-        </li>
-    </ul>
-</div>
-
+<aside id="tweetArea"></aside>
+@section Scripts {
+    <script src="~/js/tweetsIntegration.js"></script>
 }
-
-<video> src</video>

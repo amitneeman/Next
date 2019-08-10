@@ -34,7 +34,6 @@ namespace Next
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
             services.AddDbContext<NextContext>(options =>
          options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<User>().AddEntityFrameworkStores<NextContext>();
