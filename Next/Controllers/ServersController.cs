@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Next.Data;
 using Next.Models;
 using Next.Areas.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace Next.Controllers
 {
@@ -61,6 +62,7 @@ namespace Next.Controllers
 
             switch (sortOrder)
             {
+
                 case "cpu_desc":
                     nextContext = nextContext.OrderByDescending(s => s.CPU).Include(s => s.DataCenter).Include(s => s.User);
                     break;
@@ -92,6 +94,12 @@ namespace Next.Controllers
         // GET: Servers/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -112,6 +120,17 @@ namespace Next.Controllers
         // GET: Servers/Create
         public IActionResult Create()
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
+            if (getLinuxOrdersCount() >= 2)
+            {
+                ViewData["LinuxGuide"] = "🐧🐧 Hello! we have seen you ordered some linux servers recently! here is a guide to operate them: 🐧🐧";
+                ViewData["linuxLink"] = "https://ryanstutorials.net/linuxtutorial/"; 
+            }
             ViewData["DCName"] = new SelectList(_context.DataCenter, "ID", "Name");
             return View();
         }
@@ -123,6 +142,17 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
+            if (server.OS == OS.Linux)
+            {
+                increaseLinuxCount();
+            }
+
             string currentUserName = User.Identity.Name;
             if(currentUserName == null)
             {
@@ -157,6 +187,12 @@ namespace Next.Controllers
         // GET: Servers/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -181,6 +217,12 @@ namespace Next.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("ID,CPU,RAM,UserID,OS,DataCenterID")] Server server)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id != server.ID)
             {
                 return NotFound();
@@ -214,6 +256,12 @@ namespace Next.Controllers
         // GET: Servers/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
+            string username = User.Identity.Name;
+            if (string.IsNullOrEmpty(username))
+            {
+                return View("_NotLoggedIn");
+            }
+
             if (id == null)
             {
                 return NotFound();
@@ -245,6 +293,28 @@ namespace Next.Controllers
         private bool ServerExists(string id)
         {
             return _context.Servers.Any(e => e.ID == id);
+        }
+
+        private void increaseLinuxCount()
+        {
+            int? current = HttpContext.Session.GetInt32("linux");
+            if(current == null)
+            {
+                current = 0;
+            }
+
+            HttpContext.Session.SetInt32("linux", ((int)current + 1));
+        }
+
+        private int getLinuxOrdersCount()
+        {
+            int? current = HttpContext.Session.GetInt32("linux");
+            if(current == null)
+            {
+                return 0;
+            }
+
+            return (int)current;
         }
     }
 }
