@@ -100,3 +100,19 @@ body {
 #personal-data{
     display: none;
 }
+
+.startorder {
+    padding: 10px;
+    box-shadow: 0 0 1px black;
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: 0.5s all;
+    color: black !important;
+}
+
+    .startorder:hover {
+        color: white !important;
+        background: #2ad165;
+        font-weight: bold;
+        font-size: 16px; 
+    }
